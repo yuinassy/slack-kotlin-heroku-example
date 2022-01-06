@@ -30,14 +30,7 @@ fun buildArigatoView(): View {
                     }
                     label("ポイント", emoji = true)
                 }
-                input {
-                    blockId("agenda-block")
-                    plainTextInput {
-                        actionId("agenda-action")
-                        multiline(true)
-                    }
-                    label("Detailed Agenda", emoji = true)
-                }
+
                 section {
                     blockId("category-block")
                     markdownText("Select a category of the meeting!")
