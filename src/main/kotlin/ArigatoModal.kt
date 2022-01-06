@@ -16,14 +16,11 @@ fun buildArigatoView(): View {
             .privateMetadata("""{"someData":"someValue"}""")
             .blocks {
                 input {
-                    label("ToLabel")
-
-                    markdownText("To")
+                    label("To")
                     usersSelect {
                         placeholder("佐藤")
                         actionId("to-select-action")
                     }
-
                 }
 
                 input {
