@@ -17,7 +17,11 @@ fun main(args: Array<String>) {
     val app = App(appConfig)
 
     app.command("/arigato"){ req, ctx ->
-        ctx.ack("どういたしまして")
+        val res = ctx.client().viewsOpen {
+            it.triggerId(ctx.triggerId).view(buildArigatoView())
+        }
+        if (res.isOk) ctx.ack()
+        else Response.builder().statusCode(500).body(res.error).build()
     }
 
     app.command("/hello") { req, ctx ->
