@@ -1,6 +1,8 @@
 object Const {
     object CallbackId {
+        const val arigato = "arigato"
         const val meetingManagement = "meeting-arrangement"
+
     }
 
     object Action {
