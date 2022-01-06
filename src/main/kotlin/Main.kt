@@ -16,6 +16,10 @@ fun main(args: Array<String>) {
 
     val app = App(appConfig)
 
+    app.command("/arigato"){ req, ctx ->
+        ctx.ack("どういたしまして")
+    }
+
     app.command("/hello") { req, ctx ->
         ctx.ack(":wave: Hello!")
     }
