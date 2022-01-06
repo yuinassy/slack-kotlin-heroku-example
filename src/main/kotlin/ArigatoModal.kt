@@ -1,6 +1,7 @@
 import com.slack.api.model.kotlin_extension.view.blocks
 import com.slack.api.model.view.View
 import com.slack.api.model.view.Views
+import java.awt.Label
 
 fun buildArigatoView(): View {
     return Views.view { thisView ->
@@ -14,6 +15,7 @@ fun buildArigatoView(): View {
             .privateMetadata("""{"someData":"someValue"}""")
             .blocks {
                 section {
+
                     markdownText("To")
                     usersSelect {
                         placeholder("佐藤")
@@ -26,40 +28,19 @@ fun buildArigatoView(): View {
                     blockId("point-block")
                     plainTextInput {
                         actionId("point-action")
-                        multiline(true)
+                        multiline(false)
                     }
                     label("ポイント", emoji = true)
                 }
 
-                section {
-                    blockId("category-block")
-                    markdownText("Select a category of the meeting!")
-                    staticSelect {
-                        actionId(Const.Action.categorySelection)
-                        placeholder("Select a category")
-                        options {
-                            option {
-                                text("plain_text", "Customer")
-                                value("customer")
-                            }
-                            option {
-                                text("plain_text", "Partner")
-                                value("partner")
-                            }
-                            option {
-                                text("plain_text", "Internal")
-                                value("internal")
-                            }
-                        }
-                    }
-                }
+
                 input {
-                    blockId("agenda-block")
+                    blockId("message-block")
                     plainTextInput {
-                        actionId("agenda-action")
+                        actionId("message-action")
                         multiline(true)
                     }
-                    label("Detailed Agenda", emoji = true)
+                    label("メッセージ本文", emoji = true)
                 }
             }
     }
