@@ -1,3 +1,4 @@
+import com.slack.api.model.block.composition.BlockCompositions.markdownText
 import com.slack.api.model.kotlin_extension.view.blocks
 import com.slack.api.model.view.View
 import com.slack.api.model.view.Views
@@ -14,7 +15,8 @@ fun buildArigatoView(): View {
             .close(Views.viewClose { it.type("plain_text").text("キャンセル").emoji(true) })
             .privateMetadata("""{"someData":"someValue"}""")
             .blocks {
-                section {
+                input {
+                    label("ToLabel")
 
                     markdownText("To")
                     usersSelect {
@@ -29,6 +31,7 @@ fun buildArigatoView(): View {
                     plainTextInput {
                         actionId("point-action")
                         multiline(false)
+                        placeholder("39")
                     }
                     label("ポイント", emoji = true)
                 }
