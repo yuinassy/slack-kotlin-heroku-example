@@ -71,6 +71,15 @@ fun main(args: Array<String>) {
         printLog("respUser.profile.displayName = ${respUser.profile.displayName}")
         printLog("respUser.profile.email = ${respUser.profile.email}")
         printLog("respUser.profile.image24 = ${respUser.profile.image24}")
+        printLog("respUser.profile.image24 = ${respUser.profile.realName}")
+
+        val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
+            r // The token you used to initialize your app is stored in the `context` object
+                .channel(ctx.channelId)
+                .username(respBot.profile.displayName)
+//                .iconUrl(respBot.profile.image192)
+                .text("world")
+        }
 
         ctx.ack()
     }
