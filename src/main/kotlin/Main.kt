@@ -38,16 +38,6 @@ fun main(args: Array<String>) {
         printLog("botId=${ctx.botId}")
         printLog("botToken=${ctx.botToken}")
 
-        val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
-            r // The token you used to initialize your app is stored in the `context` object
-                .channel(ctx.getChannelId())
-                .username("佐藤")
-                .text("world")
-
-
-        }
-
-
 //        val resp = ctx.client().usersIdentity(
 //            UsersIdentityRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build())
 
