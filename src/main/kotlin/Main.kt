@@ -18,6 +18,7 @@ fun main(args: Array<String>) {
     val appConfig = AppConfig.builder()
         .singleTeamBotToken(dotenv["SLACK_BOT_TOKEN"])
         .signingSecret(dotenv["SLACK_SIGNING_SECRET"])
+
         .build()
 
     val app = App(appConfig)
@@ -36,7 +37,10 @@ fun main(args: Array<String>) {
                 .channel(ctx.getChannelId())
                 .username("佐藤")
                 .text("world")
+
+
         }
+
         val resp = ctx.client().usersIdentity(
             UsersIdentityRequest.builder().token(ctx.botToken).build())
 
@@ -45,6 +49,7 @@ fun main(args: Array<String>) {
         printLog("user.email = ${resp.user?.email}")
         printLog("user.image32 = ${resp.user?.image32}")
         printLog("error = ${resp.error}")
+        printLog("userToken = ${ctx.requestUserToken}")
 
         ctx.ack()
     }
