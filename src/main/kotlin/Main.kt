@@ -2,7 +2,10 @@ import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.response.Response
+import com.slack.api.bolt.util.ListenerCodeSuggestion.event
+import com.slack.api.methods.response.chat.ChatPostMessageResponse
 import io.github.cdimascio.dotenv.dotenv
+
 
 fun main(args: Array<String>) {
     val dotenv = dotenv {
@@ -25,7 +28,12 @@ fun main(args: Array<String>) {
     }
 
     app.command("/hello") { req, ctx ->
-        ctx.ack(":wave: Hello!")
+        val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
+            r // The token you used to initialize your app is stored in the `context` object
+                .channel(ctx.getChannelId())
+                .text("world")
+        }
+        ctx.ack()
     }
 
     app.command("/meeting") { req, ctx ->
