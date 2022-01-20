@@ -4,6 +4,7 @@ import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.response.Response
 import com.slack.api.bolt.util.ListenerCodeSuggestion.event
 import com.slack.api.methods.request.users.UsersIdentityRequest
+import com.slack.api.methods.request.users.profile.UsersProfileGetRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
 import io.github.cdimascio.dotenv.dotenv
 import mu.KotlinLogging
@@ -41,15 +42,35 @@ fun main(args: Array<String>) {
 
         }
 
-        val resp = ctx.client().usersIdentity(
-            UsersIdentityRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build())
+//        val resp = ctx.client().usersIdentity(
+//            UsersIdentityRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build())
 
-        printLog("user.id = ${resp.user?.id}")
-        printLog("user.name = ${resp.user?.name}")
-        printLog("user.email = ${resp.user?.email}")
-        printLog("user.image32 = ${resp.user?.image32}")
-        printLog("error = ${resp.error}")
-        printLog("userToken = ${ctx.requestUserToken}")
+//        printLog("user.id = ${resp.user?.id}")
+//        printLog("user.name = ${resp.user?.name}")
+//        printLog("user.email = ${resp.user?.email}")
+//        printLog("user.image32 = ${resp.user?.image32}")
+//        printLog("error = ${resp.error}")
+//        printLog("userToken = ${ctx.requestUserToken}")
+
+        val respBot = ctx.client().usersProfileGet(
+            UsersProfileGetRequest.builder().token(ctx.botToken).build()
+        )
+        printLog("respBot.isOk = ${respBot.isOk}")
+        printLog("respBot.error = ${respBot.error}")
+        printLog("respBot.profile.botId = ${respBot.profile.botId}")
+        printLog("respBot.profile.displayName = ${respBot.profile.displayName}")
+        printLog("respBot.profile.email = ${respBot.profile.email}")
+        printLog("respBot.profile.image24 = ${respBot.profile.image24}")
+
+        val respUser = ctx.client().usersProfileGet(
+            UsersProfileGetRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build()
+        )
+        printLog("respUser.isOk = ${respUser.isOk}")
+        printLog("respUser.error = ${respUser.error}")
+        printLog("respUser.profile.botId  = ${respUser.profile.botId}")
+        printLog("respUser.profile.displayName = ${respUser.profile.displayName}")
+        printLog("respUser.profile.email = ${respUser.profile.email}")
+        printLog("respUser.profile.image24 = ${respUser.profile.image24}")
 
         ctx.ack()
     }
