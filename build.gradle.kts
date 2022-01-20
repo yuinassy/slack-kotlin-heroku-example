@@ -25,6 +25,8 @@ dependencies {
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
 
     implementation("ch.qos.logback:logback-classic:1.3.0-alpha12")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.0.1")
 }
 
 tasks {

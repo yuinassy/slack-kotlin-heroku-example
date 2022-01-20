@@ -3,9 +3,12 @@ import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.response.Response
 import com.slack.api.bolt.util.ListenerCodeSuggestion.event
+import com.slack.api.methods.request.users.UsersIdentityRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
 import io.github.cdimascio.dotenv.dotenv
+import mu.KotlinLogging
 
+private val logger = KotlinLogging.logger {}
 
 fun main(args: Array<String>) {
     val dotenv = dotenv {
@@ -34,6 +37,10 @@ fun main(args: Array<String>) {
                 .username("佐藤")
                 .text("world")
         }
+        val resp = ctx.client().usersIdentity(
+            UsersIdentityRequest.builder().token(ctx.botToken).build())
+
+        logger.error { "佐藤" }
         ctx.ack()
     }
 
