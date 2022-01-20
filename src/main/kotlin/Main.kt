@@ -33,6 +33,11 @@ fun main(args: Array<String>) {
     }
 
     app.command("/hello") { req, ctx ->
+        printLog("requestUserId=${ctx.requestUserId}")
+        printLog("requestUserToken=${ctx.requestUserToken}")
+        printLog("botId=${ctx.botId}")
+        printLog("botToken=${ctx.botToken}")
+
         val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
             r // The token you used to initialize your app is stored in the `context` object
                 .channel(ctx.getChannelId())
@@ -54,7 +59,10 @@ fun main(args: Array<String>) {
 //        printLog("userToken = ${ctx.requestUserToken}")
 
         val respBot = ctx.client().usersProfileGet(
-            UsersProfileGetRequest.builder().token(ctx.botToken).build()
+            UsersProfileGetRequest.builder()
+                .token(ctx.botToken)
+                .user(ctx.requestUserId)
+                .build()
         )
         printLog("respBot.isOk = ${respBot.isOk}")
         printLog("respBot.error = ${respBot.error}")
