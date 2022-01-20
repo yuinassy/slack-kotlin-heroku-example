@@ -44,6 +44,7 @@ fun main(args: Array<String>) {
         printLog("user.name = ${resp.user?.name}")
         printLog("user.email = ${resp.user?.email}")
         printLog("user.image32 = ${resp.user?.image32}")
+        printLog("error = ${resp.error}")
 
         ctx.ack()
     }
