@@ -70,6 +70,7 @@ fun main(args: Array<String>) {
         printLog("respBot.profile.displayName = ${respBot.profile.displayName}")
         printLog("respBot.profile.email = ${respBot.profile.email}")
         printLog("respBot.profile.image24 = ${respBot.profile.image24}")
+        printLog("respBot.profile.image24 = ${respBot.profile.realName}")
 
         val respUser = ctx.client().usersProfileGet(
             UsersProfileGetRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build()
