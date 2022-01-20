@@ -40,10 +40,10 @@ fun main(args: Array<String>) {
         val resp = ctx.client().usersIdentity(
             UsersIdentityRequest.builder().token(ctx.botToken).build())
 
-        printLog("user.id = ${resp.user.id}")
-        printLog("user.name = ${resp.user.name}")
-        printLog("user.email = ${resp.user.email}")
-        printLog("user.image32 = ${resp.user.image32}")
+        printLog("user.id = ${resp.user?.id}")
+        printLog("user.name = ${resp.user?.name}")
+        printLog("user.email = ${resp.user?.email}")
+        printLog("user.image32 = ${resp.user?.image32}")
 
         ctx.ack()
     }
