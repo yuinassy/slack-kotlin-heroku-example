@@ -40,7 +40,9 @@ fun main(args: Array<String>) {
         val resp = ctx.client().usersIdentity(
             UsersIdentityRequest.builder().token(ctx.botToken).build())
 
-        logger.error { "佐藤" }
+//        logger.error { "佐藤" }
+        println("あああああああああああああああああああああああああああああああああああああああああああああああああ")
+
         ctx.ack()
     }
 
