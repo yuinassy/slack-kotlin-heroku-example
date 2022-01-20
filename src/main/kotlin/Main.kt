@@ -31,6 +31,7 @@ fun main(args: Array<String>) {
         val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
             r // The token you used to initialize your app is stored in the `context` object
                 .channel(ctx.getChannelId())
+                .username("佐藤")
                 .text("world")
         }
         ctx.ack()
