@@ -43,8 +43,10 @@ fun main(args: Array<String>) {
         )
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]!!["message-action"]!!.value
-        val toSelect = stateValues["to-select-block"]!!["to-select-action"]!!.value
+        val point = stateValues["point-block"]!!["point-action"]!!.value?.toIntOrNull()
+        val toSelect = stateValues["to-select-block"]!!["to-select-action"]!!.selectedUser
         printLog("to-select=${toSelect}")
+        printLog("point=${point}")
 
         val errors = mutableMapOf<String, String>()
         if (message.length <= 10) {
