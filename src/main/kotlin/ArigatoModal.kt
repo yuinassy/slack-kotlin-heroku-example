@@ -4,7 +4,8 @@ import com.slack.api.model.view.View
 import com.slack.api.model.view.Views
 import java.awt.Label
 
-fun buildArigatoView(): View {
+fun buildArigatoView(channelId: String): View {
+
     return Views.view { thisView ->
         thisView
             .callbackId(Const.CallbackId.arigato)

@@ -33,6 +33,7 @@ fun main(args: Array<String>) {
     }
 
     app.viewSubmission(Const.CallbackId.arigato) { req, ctx ->
+        val privateMetadata = req.payload.view.privateMetadata
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]!!["message-action"]!!.value
         val errors = mutableMapOf<String, String>()
@@ -42,6 +43,19 @@ fun main(args: Array<String>) {
         if (errors.isNotEmpty()) {
             ctx.ack { it.responseAction("errors").errors(errors) }
         } else {
+            val resp = ctx.client().usersProfileGet(
+                UsersProfileGetRequest.builder()
+                    .token(ctx.botToken)
+                    .user(ctx.requestUserId)
+                    .build()
+            )
+
+            val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
+                r.channel(ctx.channelId)
+                    .username(resp.profile?.displayName ?: "名無し")
+                    .text(message)
+            }
+
             // TODO: may store the stateValues and privateMetadata
             // Responding with an empty body means closing the modal now.
             // If your app has next steps, respond with other response_action and a modal view.
@@ -95,7 +109,7 @@ fun main(args: Array<String>) {
             r // The token you used to initialize your app is stored in the `context` object
                 .channel(ctx.channelId)
                 .username(respBot.profile?.displayName ?: "名無し")
-//                .iconUrl(respBot.profile.image192) TODO アイコンがあなぜかうまくいかない。
+//                .iconUrl(respBot.profile.image192) TODO アイコンがなぜかうまくいかない。
                 .text("world")
         }
 
