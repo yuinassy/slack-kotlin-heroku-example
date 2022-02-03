@@ -67,8 +67,11 @@ fun main(args: Array<String>) {
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
                 r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
-                    .text("<@${selectedUserId}>\n${message}")
+//                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
+                        section {
+                            plainText("<@${selectedUserId}>\n${message}", emoji = true)
+                        }
                         actions {
                             // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
                             // これは section ブロックの accessory についても同様です
