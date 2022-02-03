@@ -64,7 +64,7 @@ fun main(args: Array<String>) {
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
                 r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
-                    .text(message)
+                    .text("<@${selectedUserId}> ${message}")
             }
 
             // TODO: may store the stateValues and privateMetadata
