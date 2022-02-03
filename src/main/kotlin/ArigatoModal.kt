@@ -19,6 +19,7 @@ fun buildArigatoView(channelId: String): View {
             .privateMetadata(privateMetadataString)
             .blocks {
                 input {
+                    blockId("to-select-block")
                     label("To")
                     usersSelect {
                         placeholder("佐藤")

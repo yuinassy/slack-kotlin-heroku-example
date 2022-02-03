@@ -43,6 +43,9 @@ fun main(args: Array<String>) {
         )
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]!!["message-action"]!!.value
+        val toSelect = stateValues["to-select-block"]!!["to-select-action"]!!.value
+        printLog("to-select=${toSelect}")
+
         val errors = mutableMapOf<String, String>()
         if (message.length <= 10) {
             errors["message-block"] = "Agenda needs to be longer than 10 characters."
