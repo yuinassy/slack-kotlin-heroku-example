@@ -3,8 +3,11 @@ import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.response.Response
+import com.slack.api.methods.kotlin_extension.request.chat.blocks
 import com.slack.api.methods.request.users.profile.UsersProfileGetRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
+import com.slack.api.model.block.Blocks.actions
+import com.slack.api.model.block.Blocks.asBlocks
 import com.slack.api.util.json.GsonFactory
 import io.github.cdimascio.dotenv.dotenv
 import mu.KotlinLogging
@@ -64,7 +67,25 @@ fun main(args: Array<String>) {
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
                 r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
-                    .text("<@${selectedUserId}> ${message}")
+                    .text("<@${selectedUserId}>\n${message}")
+                    .blocks {
+                        actions {
+                            // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
+                            // これは section ブロックの accessory についても同様です
+                            button {
+                                text(":clap:×1", emoji = true)
+                                value("clap1")
+                            }
+                            button {
+                                text(":clap:×3", emoji = true)
+                                value("clap3")
+                            }
+                            button {
+                                text(":clap:×5", emoji = true)
+                                value("clap5")
+                            }
+                        }
+                    }
             }
 
             // TODO: may store the stateValues and privateMetadata
