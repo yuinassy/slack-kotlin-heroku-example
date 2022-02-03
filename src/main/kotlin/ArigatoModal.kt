@@ -1,8 +1,8 @@
-import com.slack.api.model.block.composition.BlockCompositions.markdownText
+import `object`.ArigatoPrivateMetadata
 import com.slack.api.model.kotlin_extension.view.blocks
 import com.slack.api.model.view.View
 import com.slack.api.model.view.Views
-import java.awt.Label
+import com.slack.api.util.json.GsonFactory
 
 fun buildArigatoView(channelId: String): View {
 
@@ -47,4 +47,4 @@ fun buildArigatoView(channelId: String): View {
     }
 }
 
-data class ArigatoPrivateMetadata(var channelId: String?)
+
