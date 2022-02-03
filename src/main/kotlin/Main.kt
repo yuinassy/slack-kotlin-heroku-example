@@ -79,16 +79,17 @@ fun main(args: Array<String>) {
         printLog("respBot.profile.image24 = ${respBot.profile?.image24}")
         printLog("respBot.profile.image24 = ${respBot.profile?.realName}")
 
-        val respUser = ctx.client().usersProfileGet(
-            UsersProfileGetRequest.builder().token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build()
-        )
-        printLog("respUser.isOk = ${respUser.isOk}")
-        printLog("respUser.error = ${respUser.error}")
-        printLog("respUser.profile.botId  = ${respUser.profile?.botId}")
-        printLog("respUser.profile.displayName = ${respUser.profile?.displayName}")
-        printLog("respUser.profile.email = ${respUser.profile?.email}")
-        printLog("respUser.profile.image24 = ${respUser.profile?.image24}")
-        printLog("respUser.profile.realName = ${respUser.profile?.realName}")
+//        val respUser = ctx.client().usersProfileGet(
+//            UsersProfileGetRequest.builder()
+//                .token("xoxp-1948231796678-2830443268582-2991803022945-dccb636ab86f7608a3b97dbd701bc58a").build()
+//        )
+//        printLog("respUser.isOk = ${respUser.isOk}")
+//        printLog("respUser.error = ${respUser.error}")
+//        printLog("respUser.profile.botId  = ${respUser.profile?.botId}")
+//        printLog("respUser.profile.displayName = ${respUser.profile?.displayName}")
+//        printLog("respUser.profile.email = ${respUser.profile?.email}")
+//        printLog("respUser.profile.image24 = ${respUser.profile?.image24}")
+//        printLog("respUser.profile.realName = ${respUser.profile?.realName}")
 
         val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
             r // The token you used to initialize your app is stored in the `context` object
