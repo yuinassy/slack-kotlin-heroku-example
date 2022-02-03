@@ -3,8 +3,6 @@ import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.response.Response
-import com.slack.api.bolt.util.ListenerCodeSuggestion.event
-import com.slack.api.methods.request.users.UsersIdentityRequest
 import com.slack.api.methods.request.users.profile.UsersProfileGetRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
 import com.slack.api.util.json.GsonFactory
@@ -44,8 +42,8 @@ fun main(args: Array<String>) {
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]!!["message-action"]!!.value
         val point = stateValues["point-block"]!!["point-action"]!!.value?.toIntOrNull()
-        val toSelect = stateValues["to-select-block"]!!["to-select-action"]!!.selectedUser
-        printLog("to-select=${toSelect}")
+        val selectedUserId = stateValues["to-select-block"]!!["to-select-action"]!!.selectedUser
+        printLog("selectedUserId=${selectedUserId}")
         printLog("point=${point}")
 
         val errors = mutableMapOf<String, String>()
