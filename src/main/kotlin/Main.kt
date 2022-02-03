@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
 
     app.command("/arigato") { req, ctx ->
         val res = ctx.client().viewsOpen {
-            it.triggerId(ctx.triggerId).view(buildArigatoView())
+            it.triggerId(ctx.triggerId).view(buildArigatoView(ctx.channelId))
         }
         if (res.isOk) ctx.ack()
         else Response.builder().statusCode(500).body(res.error).build()

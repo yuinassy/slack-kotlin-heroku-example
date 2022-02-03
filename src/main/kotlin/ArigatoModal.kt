@@ -45,3 +45,5 @@ fun buildArigatoView(): View {
             }
     }
 }
+
+data class ArigatoPrivateMetadata(var channelId: String?)
