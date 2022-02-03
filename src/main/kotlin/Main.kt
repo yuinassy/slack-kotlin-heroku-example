@@ -24,12 +24,29 @@ fun main(args: Array<String>) {
 
     val app = App(appConfig)
 
-    app.command("/arigato"){ req, ctx ->
+    app.command("/arigato") { req, ctx ->
         val res = ctx.client().viewsOpen {
             it.triggerId(ctx.triggerId).view(buildArigatoView())
         }
         if (res.isOk) ctx.ack()
         else Response.builder().statusCode(500).body(res.error).build()
+    }
+
+    app.viewSubmission(Const.CallbackId.arigato) { req, ctx ->
+        val stateValues = req.payload.view.state.values
+        val message = stateValues["message-block"]!!["message-action"]!!.value
+        val errors = mutableMapOf<String, String>()
+        if (message.length <= 10) {
+            errors["message-block"] = "Agenda needs to be longer than 10 characters."
+        }
+        if (errors.isNotEmpty()) {
+            ctx.ack { it.responseAction("errors").errors(errors) }
+        } else {
+            // TODO: may store the stateValues and privateMetadata
+            // Responding with an empty body means closing the modal now.
+            // If your app has next steps, respond with other response_action and a modal view.
+            ctx.ack()
+        }
     }
 
     app.command("/hello") { req, ctx ->
@@ -78,7 +95,7 @@ fun main(args: Array<String>) {
                 .channel(ctx.channelId)
                 .username(respBot.profile?.displayName ?: "名無し")
 //                .iconUrl(respBot.profile.image192) TODO アイコンがあなぜかうまくいかない。
-                         .text("world")
+                .text("world")
         }
 
         ctx.ack()
