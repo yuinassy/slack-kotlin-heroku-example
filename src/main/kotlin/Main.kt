@@ -1,3 +1,4 @@
+import `object`.ArigatoPrivateMetadata
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
@@ -6,6 +7,7 @@ import com.slack.api.bolt.util.ListenerCodeSuggestion.event
 import com.slack.api.methods.request.users.UsersIdentityRequest
 import com.slack.api.methods.request.users.profile.UsersProfileGetRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
+import com.slack.api.util.json.GsonFactory
 import io.github.cdimascio.dotenv.dotenv
 import mu.KotlinLogging
 
@@ -33,7 +35,12 @@ fun main(args: Array<String>) {
     }
 
     app.viewSubmission(Const.CallbackId.arigato) { req, ctx ->
-        val privateMetadata = req.payload.view.privateMetadata
+        val privateMetadataString = req.payload.view.privateMetadata
+        val gson = GsonFactory.createSnakeCase()
+        val privateMetadata: ArigatoPrivateMetadata = gson.fromJson(
+            privateMetadataString,
+            ArigatoPrivateMetadata::class.java
+        )
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]!!["message-action"]!!.value
         val errors = mutableMapOf<String, String>()
@@ -49,9 +56,10 @@ fun main(args: Array<String>) {
                     .user(ctx.requestUserId)
                     .build()
             )
+            printLog("channelId=${privateMetadata.channelId}")
 
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
-                r.channel(ctx.channelId)
+                r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
                     .text(message)
             }

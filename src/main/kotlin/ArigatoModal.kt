@@ -5,7 +5,9 @@ import com.slack.api.model.view.Views
 import com.slack.api.util.json.GsonFactory
 
 fun buildArigatoView(channelId: String): View {
-
+    val privateMetadata = ArigatoPrivateMetadata(channelId)
+    val gson = GsonFactory.createSnakeCase()
+    val privateMetadataString = gson.toJson(privateMetadata)
     return Views.view { thisView ->
         thisView
             .callbackId(Const.CallbackId.arigato)
@@ -14,7 +16,7 @@ fun buildArigatoView(channelId: String): View {
             .title(Views.viewTitle { it.type("plain_text").text("Arigato You").emoji(true) })
             .submit(Views.viewSubmit { it.type("plain_text").text("OK").emoji(true) })
             .close(Views.viewClose { it.type("plain_text").text("キャンセル").emoji(true) })
-            .privateMetadata("""{"someData":"someValue"}""")
+            .privateMetadata(privateMetadataString)
             .blocks {
                 input {
                     label("To")
