@@ -70,7 +70,7 @@ fun main(args: Array<String>) {
 //                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
                         section {
-                            plainText("<@${selectedUserId}>\n${message}", emoji = true)
+                            markdownText("<@${selectedUserId}>\n${message}")
                         }
                         actions {
                             // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
