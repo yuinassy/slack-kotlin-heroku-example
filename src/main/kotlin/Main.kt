@@ -146,7 +146,11 @@ fun main(args: Array<String>) {
                 .channel(ctx.channelId)
                 .username(respBot.profile?.displayName ?: "名無し")
                 .iconUrl(respBot.profile.image192) // TODO アイコンがなぜかうまくいかない。
-                .text("world")
+                .blocks {
+                    section {
+                        markdownText("world!!")
+                    }
+                }
         }
 
         ctx.ack()
