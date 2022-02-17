@@ -128,6 +128,9 @@ fun main(args: Array<String>) {
 
     app.blockAction(Const.Action.clap5) { req, ctx ->
         printLog("blockAction: ${Const.Action.clap5}")
+        printLog(req.payload.message.ts)
+        printLog(req.payload.channel.id)
+
         ctx.ack()
     }
 
