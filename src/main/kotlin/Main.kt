@@ -6,6 +6,7 @@ import com.slack.api.bolt.response.Response
 import com.slack.api.methods.kotlin_extension.request.chat.blocks
 import com.slack.api.methods.request.users.profile.UsersProfileGetRequest
 import com.slack.api.methods.response.chat.ChatPostMessageResponse
+import com.slack.api.methods.response.chat.ChatUpdateResponse
 import com.slack.api.model.block.Blocks.actions
 import com.slack.api.model.block.Blocks.asBlocks
 import com.slack.api.util.json.GsonFactory
@@ -70,28 +71,29 @@ fun main(args: Array<String>) {
                     .iconUrl(resp.profile?.image192)
 //                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
-                        section {
-                            markdownText("<@${selectedUserId}>\n${message}")
-                        }
-                        actions {
-                            // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
-                            // これは section ブロックの accessory についても同様です
-                            button {
-                                text(":clap:×1", emoji = true)
-                                value("clap1")
-                                actionId(Const.Action.clap1)
-                            }
-                            button {
-                                text(":clap:×3", emoji = true)
-                                value("clap3")
-                                actionId(Const.Action.clap3)
-                            }
-                            button {
-                                text(":clap:×5", emoji = true)
-                                value("clap5")
-                                actionId(Const.Action.clap5)
-                            }
-                        }
+                        buildArigatoChat(selectedUserId, message)
+//                        section {
+//                            markdownText("<@${selectedUserId}>\n${message}")
+//                        }
+//                        actions {
+//                            // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
+//                            // これは section ブロックの accessory についても同様です
+//                            button {
+//                                text(":clap:×1", emoji = true)
+//                                value("clap1")
+//                                actionId(Const.Action.clap1)
+//                            }
+//                            button {
+//                                text(":clap:×3", emoji = true)
+//                                value("clap3")
+//                                actionId(Const.Action.clap3)
+//                            }
+//                            button {
+//                                text(":clap:×5", emoji = true)
+//                                value("clap5")
+//                                actionId(Const.Action.clap5)
+//                            }
+//                        }
                     }
             }
 
@@ -109,6 +111,18 @@ fun main(args: Array<String>) {
 
     app.blockAction(Const.Action.clap3) { req, ctx ->
         printLog("blockAction: ${Const.Action.clap3}")
+
+        val chatUpdateResponse: ChatUpdateResponse? = ctx.client().chatUpdate { r ->
+            r.channel(req.payload.channel.id)
+                .ts(req.payload.message.ts)
+                .blocks {
+                        section {
+                            markdownText("CLAP3!!!")
+                        }
+                }
+        }
+        printLog("chatUpdateResponse=$chatUpdateResponse")
+
         ctx.ack()
     }
 
