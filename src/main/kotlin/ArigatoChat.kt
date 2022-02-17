@@ -1,6 +1,11 @@
+import `object`.ClapActionValue
 import com.slack.api.model.kotlin_extension.block.dsl.LayoutBlockDsl
+import com.slack.api.util.json.GsonFactory
+import java.util.*
 
-fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nClaps: Int): Unit {
+fun LayoutBlockDsl.buildArigatoChat(postId: UUID, selectedUserId: String, message: String, nClaps: Int): Unit {
+    val gson = GsonFactory.createSnakeCase()
+
     section {
         markdownText("<@${selectedUserId}>\n${message}")
         blockId("block-id")
@@ -10,17 +15,17 @@ fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nCla
         // これは section ブロックの accessory についても同様です
         button {
             text(":clap:×1", emoji = true)
-            value("$selectedUserId,clap1")
+            value(gson.toJson(ClapActionValue(postId, "clap1")))
             actionId(Const.Action.clap1)
         }
         button {
             text(":clap:×3", emoji = true)
-            value("$selectedUserId,clap3")
+            value(gson.toJson(ClapActionValue(postId, "clap3")))
             actionId(Const.Action.clap3)
         }
         button {
             text(":clap:×5", emoji = true)
-            value("$selectedUserId,clap5")
+            value(gson.toJson(ClapActionValue(postId, "clap5")))
             actionId(Const.Action.clap5)
         }
     }

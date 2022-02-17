@@ -1,4 +1,5 @@
 import `object`.ArigatoPrivateMetadata
+import `object`.ClapActionValue
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.jetty.SlackAppServer
@@ -12,6 +13,7 @@ import com.slack.api.model.block.Blocks.asBlocks
 import com.slack.api.util.json.GsonFactory
 import io.github.cdimascio.dotenv.dotenv
 import mu.KotlinLogging
+import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -65,13 +67,15 @@ fun main(args: Array<String>) {
             )
             printLog("channelId=${privateMetadata.channelId}")
 
+            val postId = UUID.randomUUID()
+
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
                 r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
                     .iconUrl(resp.profile?.image192)
 //                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
-                        buildArigatoChat(selectedUserId, message, 0)
+                        buildArigatoChat(postId, selectedUserId, message, 0)
 //                        section {
 //                            markdownText("<@${selectedUserId}>\n${message}")
 //                        }
@@ -120,9 +124,9 @@ fun main(args: Array<String>) {
             r.channel(req.payload.channel.id)
                 .ts(req.payload.message.ts) // タイムスタンプでメッセージを判別してるっぽい。
                 .blocks {
-                        section {
-                            markdownText("CLAP3!!!: value=${req.payload.actions[0]?.value}")
-                        }
+                    section {
+                        markdownText("CLAP3!!!: postId=${clapActionValue?.postId}, type=${clapActionValue?.type}")
+                    }
                 }
         }
         printLog("chatUpdateResponse=$chatUpdateResponse")
