@@ -78,14 +78,17 @@ fun main(args: Array<String>) {
                             button {
                                 text(":clap:×1", emoji = true)
                                 value("clap1")
+                                actionId(Const.Action.clap)
                             }
                             button {
                                 text(":clap:×3", emoji = true)
                                 value("clap3")
+                                actionId(Const.Action.clap)
                             }
                             button {
                                 text(":clap:×5", emoji = true)
                                 value("clap5")
+                                actionId(Const.Action.clap)
                             }
                         }
                     }
@@ -96,6 +99,11 @@ fun main(args: Array<String>) {
             // If your app has next steps, respond with other response_action and a modal view.
             ctx.ack()
         }
+    }
+
+    app.blockAction(Const.Action.clap) { req, ctx ->
+        printLog("blockAction: ${Const.Action.clap}")
+        ctx.ack()
     }
 
     app.command("/hello") { req, ctx ->

@@ -7,5 +7,6 @@ object Const {
 
     object Action {
         const val categorySelection = "category-selection-action"
+        const val clap = "clap-action"
     }
 }
