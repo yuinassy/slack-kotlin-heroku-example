@@ -112,6 +112,10 @@ fun main(args: Array<String>) {
     app.blockAction(Const.Action.clap3) { req, ctx ->
         printLog("blockAction: ${Const.Action.clap3}")
 
+//        val stateValues = req.payload.view.state.values
+//        val message = stateValues["block-id"]!!.value
+//        printLog("block-id: ${message}")
+
         val chatUpdateResponse: ChatUpdateResponse? = ctx.client().chatUpdate { r ->
             r.channel(req.payload.channel.id)
                 .ts(req.payload.message.ts) // タイムスタンプでメッセージを判別してるっぽい。

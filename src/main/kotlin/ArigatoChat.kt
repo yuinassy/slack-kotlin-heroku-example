@@ -3,6 +3,7 @@ import com.slack.api.model.kotlin_extension.block.dsl.LayoutBlockDsl
 fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nClaps: Int): Unit {
     section {
         markdownText("<@${selectedUserId}>\n${message}")
+        blockId("block-id")
     }
     actions {
         // JSON の構造と揃えるなら、ここに elements { } のブロックを置くこともできますが、省略しても構いません
