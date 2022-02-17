@@ -117,8 +117,10 @@ fun main(args: Array<String>) {
         printLog("blockAction: ${Const.Action.clap3}")
 
 //        val stateValues = req.payload.view.state.values
-//        val message = stateValues["block-id"]!!.value
-//        printLog("block-id: ${message}")
+//        printLog("block-id: ${stateValues["block-id"]!!.}")
+
+        val gson = GsonFactory.createSnakeCase()
+        val clapActionValue = gson.fromJson(req.payload.actions[0]?.value, ClapActionValue::class.java)
 
         val chatUpdateResponse: ChatUpdateResponse? = ctx.client().chatUpdate { r ->
             r.channel(req.payload.channel.id)
