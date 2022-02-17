@@ -9,17 +9,17 @@ fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nCla
         // これは section ブロックの accessory についても同様です
         button {
             text(":clap:×1", emoji = true)
-            value("clap1")
+            value("$selectedUserId,clap1")
             actionId(Const.Action.clap1)
         }
         button {
             text(":clap:×3", emoji = true)
-            value("clap3")
+            value("$selectedUserId,clap3")
             actionId(Const.Action.clap3)
         }
         button {
             text(":clap:×5", emoji = true)
-            value("clap5")
+            value("$$selectedUserId,clap5")
             actionId(Const.Action.clap5)
         }
     }

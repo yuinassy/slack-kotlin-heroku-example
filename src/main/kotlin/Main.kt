@@ -117,7 +117,7 @@ fun main(args: Array<String>) {
                 .ts(req.payload.message.ts) // タイムスタンプでメッセージを判別してるっぽい。
                 .blocks {
                         section {
-                            markdownText("CLAP3!!!")
+                            markdownText("CLAP3!!!: value=${req.payload.actions[0]?.value}")
                         }
                 }
         }
