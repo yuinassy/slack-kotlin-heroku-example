@@ -1,6 +1,6 @@
 import com.slack.api.model.kotlin_extension.block.dsl.LayoutBlockDsl
 
-fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String): Unit {
+fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nClaps: Int): Unit {
     section {
         markdownText("<@${selectedUserId}>\n${message}")
     }
@@ -21,6 +21,11 @@ fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String): Uni
             text(":clap:×5", emoji = true)
             value("clap5")
             actionId(Const.Action.clap5)
+        }
+    }
+    if (nClaps > 0) {
+        section {
+            markdownText("${nClaps}拍手！")
         }
     }
 }

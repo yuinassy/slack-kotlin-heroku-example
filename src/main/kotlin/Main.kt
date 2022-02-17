@@ -71,7 +71,7 @@ fun main(args: Array<String>) {
                     .iconUrl(resp.profile?.image192)
 //                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
-                        buildArigatoChat(selectedUserId, message)
+                        buildArigatoChat(selectedUserId, message, 0)
 //                        section {
 //                            markdownText("<@${selectedUserId}>\n${message}")
 //                        }
@@ -114,7 +114,7 @@ fun main(args: Array<String>) {
 
         val chatUpdateResponse: ChatUpdateResponse? = ctx.client().chatUpdate { r ->
             r.channel(req.payload.channel.id)
-                .ts(req.payload.message.ts)
+                .ts(req.payload.message.ts) // タイムスタンプでメッセージを判別してるっぽい。
                 .blocks {
                         section {
                             markdownText("CLAP3!!!")
