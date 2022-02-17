@@ -19,7 +19,7 @@ fun LayoutBlockDsl.buildArigatoChat(selectedUserId: String, message:String, nCla
         }
         button {
             text(":clap:×5", emoji = true)
-            value("$$selectedUserId,clap5")
+            value("$selectedUserId,clap5")
             actionId(Const.Action.clap5)
         }
     }
