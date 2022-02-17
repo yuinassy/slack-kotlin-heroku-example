@@ -150,7 +150,7 @@ fun main(args: Array<String>) {
                 .blocks {
                     section {
                         markdownText("world!!")
-                        image(respBot.profile.image192)
+                        image(respBot.profile.image192, altText = "user icon")
                     }
                 }
         }
