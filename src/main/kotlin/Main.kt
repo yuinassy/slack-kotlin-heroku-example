@@ -78,17 +78,17 @@ fun main(args: Array<String>) {
                             button {
                                 text(":clap:×1", emoji = true)
                                 value("clap1")
-                                actionId(Const.Action.clap)
+                                actionId(Const.Action.clap1)
                             }
                             button {
                                 text(":clap:×3", emoji = true)
                                 value("clap3")
-                                actionId(Const.Action.clap)
+                                actionId(Const.Action.clap3)
                             }
                             button {
                                 text(":clap:×5", emoji = true)
                                 value("clap5")
-                                actionId(Const.Action.clap)
+                                actionId(Const.Action.clap5)
                             }
                         }
                         section {
@@ -104,8 +104,18 @@ fun main(args: Array<String>) {
         }
     }
 
-    app.blockAction(Const.Action.clap) { req, ctx ->
-        printLog("blockAction: ${Const.Action.clap}")
+    app.blockAction(Const.Action.clap1) { req, ctx ->
+        printLog("blockAction: ${Const.Action.clap1}")
+        ctx.ack()
+    }
+
+    app.blockAction(Const.Action.clap3) { req, ctx ->
+        printLog("blockAction: ${Const.Action.clap3}")
+        ctx.ack()
+    }
+
+    app.blockAction(Const.Action.clap5) { req, ctx ->
+        printLog("blockAction: ${Const.Action.clap5}")
         ctx.ack()
     }
 

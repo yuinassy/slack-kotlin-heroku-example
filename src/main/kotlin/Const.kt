@@ -7,6 +7,8 @@ object Const {
 
     object Action {
         const val categorySelection = "category-selection-action"
-        const val clap = "clap-action"
+        const val clap1 = "clap1-action"
+        const val clap3 = "clap3-action"
+        const val clap5 = "clap5-action"
     }
 }
