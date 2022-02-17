@@ -145,9 +145,8 @@ fun main(args: Array<String>) {
             r // The token you used to initialize your app is stored in the `context` object
                 .channel(ctx.channelId)
                 .username(respBot.profile?.displayName ?: "名無し")
-                .iconUrl(respBot.profile.image192) // TODO アイコンがなぜかうまくいかない。
-//                .iconEmoji(respBot.profile.image192)
-                .iconEmoji("clap")
+                .iconUrl(respBot.profile.image24) // TODO アイコンがなぜかうまくいかない。
+//                .iconEmoji("clap")
                 .blocks {
                     section {
                         markdownText("world!!")
