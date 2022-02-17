@@ -149,6 +149,7 @@ fun main(args: Array<String>) {
                 .blocks {
                     section {
                         markdownText("world!!")
+                        image(respBot.profile.image192)
                     }
                 }
         }
