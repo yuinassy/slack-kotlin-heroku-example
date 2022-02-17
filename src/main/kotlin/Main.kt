@@ -91,6 +91,9 @@ fun main(args: Array<String>) {
                                 actionId(Const.Action.clap)
                             }
                         }
+                        section {
+                            markdownText("拍手!")
+                        }
                     }
             }
 
