@@ -67,6 +67,7 @@ fun main(args: Array<String>) {
             val result: ChatPostMessageResponse? = ctx.client().chatPostMessage { r ->
                 r.channel(privateMetadata.channelId)
                     .username(resp.profile?.displayName ?: "名無し")
+                    .iconUrl(resp.profile?.image192)
 //                    .text("<@${selectedUserId}>\n${message}")
                     .blocks {
                         section {
