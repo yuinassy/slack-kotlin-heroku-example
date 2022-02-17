@@ -11,6 +11,7 @@ import com.slack.api.methods.response.chat.ChatUpdateResponse
 import com.slack.api.model.block.Blocks.actions
 import com.slack.api.model.block.Blocks.asBlocks
 import com.slack.api.util.json.GsonFactory
+import db.DatabaseFactory
 import io.github.cdimascio.dotenv.dotenv
 import mu.KotlinLogging
 import java.util.*
@@ -22,10 +23,12 @@ fun main(args: Array<String>) {
         ignoreIfMissing = true
     }
 
+    val jdbcUrl = dotenv["JDBC_DATABASE_URL"]
+    DatabaseFactory.init(jdbcUrl)
+
     val appConfig = AppConfig.builder()
         .singleTeamBotToken(dotenv["SLACK_BOT_TOKEN"])
         .signingSecret(dotenv["SLACK_SIGNING_SECRET"])
-
         .build()
 
     val app = App(appConfig)
